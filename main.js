@@ -16,48 +16,59 @@ var config = require('./F1040EZ.json');
 // var _ = require('lodash');
 var values = [];
 
-var cells = {
-    cell1: {
-        begin: 4,
-        end: 12
-    },
-    cell2: {
-        begin: 12,
-        end: 16
-    },
-    cell3: {
-        begin: 16,
-        end: 19
-    },
-    cell4: {
-        begin: 19,
-        end: 26
-    },
-    cell5: {
-        begin: 26,
-        end: 29
-    },
-    cell6: {
-        begin: 29,
-        end: 32
-    },
-    cell7: {
-        begin: 32,
-        end: 35
-    },
-    cell8: {
-        begin: 35,
-        end: 38
-    },
-    cell9: {
-        begin: 38,
-        end: 50
+function Obj () {
+
+}
+
+Obj.prototype = {
+    build: function (textObj, object) {
+        var column = 0;
+        if (4 < textObj.x < 12) column = 0;
+        else if (12 < textObj.x < 16) column = 1;
+        else if (16 < textObj.x < 19) column = 2;
+        else if (19 < textObj.x < 26) column = 3;
+        else if (26 < textObj.x < 29) column = 4;
+        else if (29 < textObj.x < 32) column = 5;
+        else if (32 < textObj.x < 35) column = 6;
+        else if (35 < textObj.x < 38) column = 7;
+        else if (38 < textObj.x < 50) column = 8;
+        switch (column) {
+            case 0: 
+                this.name += text.R[0].T;
+                break;
+            case 1:
+                this.datenTyp += text.R[0].T;
+                break;
+            case 2:
+                this.startwert += text.R[0].T;
+                break;
+            case 3:
+                this.offset += text.R[0].T;
+                break;
+            case 4:
+                this.remanenz += text.R[0].T;
+                break;
+            case 5:
+                this.erreichbarAusHMI += text.R[0].T;
+                break;
+            case 6:
+                this.sichtbarInHMI += text.R[0].T;
+                break;
+            case 7:
+                this.einstellwert += text.R[0].T;
+                break;
+            case 8:
+                this.kommentar += text.R[0].T;
+                break;
+        }
+        return this;
     }
 }
 
+
 var counter = 0;
 for (var pageIndex in config.formImage.Pages) {
-    var obj = {};
+    var obj = new Obj();
     for (var textIndex in config.formImage.Pages[pageIndex].Texts) {
         var text = config.formImage.Pages[pageIndex].Texts[textIndex];     
         if (cells.cell1.begin < text.x < cells.cell1.end) {
