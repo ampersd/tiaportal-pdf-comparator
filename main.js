@@ -1,5 +1,5 @@
-// 'use strict';
-// let fs = require('fs'),
+// 'use strict';s
+var fs = require('fs');
 //     PDFParser = require("pdf2json");
 
 // let pdfParser = new PDFParser();
@@ -17,163 +17,81 @@ var config = require('./F1040EZ.json');
 var values = [];
 
 function Obj () {
-
+    this.name = "";
+    this.datenTyp = "";
+    this.startwert = "";
+    this.offset = "";
+    this.remanenz = "";
+    this.erreichbarAusHMI = "";
+    this.sichtbarInHMI = "";
+    this.einstellwert = "";
+    this.kommentar = "";
 }
 
 Obj.prototype = {
-    build: function (textObj, object) {
+    getColumnNumber:  function (x) {
         var column = 0;
-        if (4 < textObj.x < 12) column = 0;
-        else if (12 < textObj.x < 16) column = 1;
-        else if (16 < textObj.x < 19) column = 2;
-        else if (19 < textObj.x < 26) column = 3;
-        else if (26 < textObj.x < 29) column = 4;
-        else if (29 < textObj.x < 32) column = 5;
-        else if (32 < textObj.x < 35) column = 6;
-        else if (35 < textObj.x < 38) column = 7;
-        else if (38 < textObj.x < 50) column = 8;
+        if (0 < x && x < 12) column = 0;
+        else if (12 < x && x < 16) column = 1;
+        else if (16 < x && x < 19) column = 2;
+        else if (19 < x && x < 26) column = 3;
+        else if (26 < x && x < 29) column = 4;
+        else if (29 < x && x < 32) column = 5;
+        else if (32 < x && x < 35) column = 6;
+        else if (35 < x && x < 38) column = 7;
+        else if (38 < x && x < 50) column = 8;
+        return column;
+    },
+    build: function (content, column) {
         switch (column) {
             case 0: 
-                this.name += text.R[0].T;
+                this.name += content;
                 break;
             case 1:
-                this.datenTyp += text.R[0].T;
+                this.datenTyp += content;
                 break;
             case 2:
-                this.startwert += text.R[0].T;
+                this.startwert += content;
                 break;
             case 3:
-                this.offset += text.R[0].T;
+                this.offset += content;
                 break;
             case 4:
-                this.remanenz += text.R[0].T;
+                this.remanenz += content;
                 break;
             case 5:
-                this.erreichbarAusHMI += text.R[0].T;
+                this.erreichbarAusHMI += content;
                 break;
             case 6:
-                this.sichtbarInHMI += text.R[0].T;
+                this.sichtbarInHMI += content;
                 break;
             case 7:
-                this.einstellwert += text.R[0].T;
+                this.einstellwert += content;
                 break;
             case 8:
-                this.kommentar += text.R[0].T;
+                this.kommentar += content;
                 break;
         }
-        return this;
     }
 }
 
-
-var counter = 0;
 for (var pageIndex in config.formImage.Pages) {
     var obj = new Obj();
+    var prev = 0;
     for (var textIndex in config.formImage.Pages[pageIndex].Texts) {
-        var text = config.formImage.Pages[pageIndex].Texts[textIndex];     
-        if (cells.cell1.begin < text.x < cells.cell1.end) {
-            if (counter == 0) {
-                obj.name = text.R[0].T;
-                counter++;
-            } else {
-                if (counter == 8) {
-                    values.push(obj);
-                    obj = {};
-                }
-                if (counter == 1) {
-                    obj.name += text.R[0].T;
-                }
-            }
-        } 
-        if (cells.cell2.begin < text.x < cells.cell2.end) {
-            if (counter == 1) {
-                obj.datenTyp = text.R[0].T;
-                counter++;
-            } else {
-                if (counter == 2) {
-                    obj.datenTyp += text.R[0].T;
-                }
-            }
-        } 
-        if (cells.cell3.begin < text.x < cells.cell3.end) {
-            if (counter == 2) {
-                obj.offset = text.R[0].T;
-                counter++;
-            } else {
-                if (counter == 3) {
-                    obj.offset += text.R[0].T;
-                }
-            }
-        } 
-        if (cells.cell4.begin < text.x < cells.cell4.end) {
-            if (counter == 3) {
-                obj.startwert = text.R[0].T;
-                counter++;
-            } else {
-                if (counter == 4) {
-                    obj.startwert += text.R[0].T;
-                }
-            }
-        } 
-        if (cells.cell5.begin < text.x < cells.cell5.end) {
-            // obj.remanenz = text.R[0].T;
-            if (counter == 4) {
-                obj.remanenz = text.R[0].T;
-                counter++;
-            } else {
-                if (counter == 5) {
-                    obj.remanenz += text.R[0].T;
-                }
-            }
-        } 
-        if (cells.cell6.begin < text.x < cells.cell6.end) {
-            // obj.erreichbarAusHMI = text.R[0].T;
-            if (counter == 5) {
-                obj.erreichbarAusHMI = text.R[0].T;
-                counter++;
-            } else {
-                if (counter == 6) {
-                    obj.erreichbarAusHMI += text.R[0].T;
-                }
-            }
-        } 
-        if (cells.cell7.begin < text.x < cells.cell7.end) {
-            // obj.sichtbarInHMI = text.R[0].T;
-            if (counter == 6) {
-                obj.sichtbarInHMI = text.R[0].T;
-                counter++;
-            } else {
-                if (counter == 7) {
-                    obj.sichtbarInHMI += text.R[0].T;
-                }
-            }
-        } 
-        if (cells.cell8.begin < text.x < cells.cell8.end) {
-            // obj.einstellwert = text.R[0].T;
-            if (counter == 7) {
-                obj.einstellwert = text.R[0].T;
-                counter++;
-            } else {
-                if (counter == 8) {
-                    obj.einstellwert += text.R[0].T;
-                }
-            }
-        } 
-        if (cells.cell9.begin < text.x < cells.cell9.end) {
-            // obj.kommentar = text.R[0].T;
-            if (counter == 8) {
-                obj.kommentar = text.R[0].T;
-                counter++;
-            } else {
-                if (counter == 9) {
-                    obj.kommentar += text.R[0].T;
-                }
-            }
+        var text = config.formImage.Pages[pageIndex].Texts[textIndex];
+        var columnFlag = obj.getColumnNumber(text.x); 
+        if (columnFlag < prev) {
+            console.log(obj);
+            values.push(obj);
+            obj = new Obj(); 
         }
+        obj.build(text.R[0].T, columnFlag);
+        prev = columnFlag;      
     }
-
 }
 // _.mapValues(config.pages, function(page){
     
 // });
 console.log(values);
+fs.writeFile("./result.json", JSON.stringify(values));
