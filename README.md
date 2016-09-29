@@ -2,6 +2,8 @@
 Tool for comparison of 2 pdf, that was produced from TIA Portal software
 
 # How to use
+Requirements: node v.4.6.0 
+
 * First install all dependencies:
 ```npm install```
 
