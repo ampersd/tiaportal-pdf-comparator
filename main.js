@@ -12,13 +12,13 @@ var res2Path = __dirname + "/temp/resNew.json";
 
 var diffJsonPath = __dirname + "/diff.json";
 
-console.log("Stage1: Start processing old.pdf");
+console.log("Stage 1: Start processing old.pdf");
 parse(pdf1Path, raw1Path, function() {
     console.log("Stage 1: Completed");
     console.log("Stage 2: Transform json \"old\"");
 
     transform(raw1Path, res1Path, function() {
-        console.log("Stage 2 Completed");
+        console.log("Stage 2: Completed");
         console.log("Stage 3: Start processing new.pdf");
 
         parse(pdf2Path, raw2Path, function() {
@@ -26,7 +26,7 @@ parse(pdf1Path, raw1Path, function() {
             console.log("Stage 4: Transform json \"new\"");
 
             transform(raw2Path, res2Path, function() {
-                console.log("Stage 4 Completed");
+                console.log("Stage 4: Completed");
                 console.log("Stage 5: finding diff");
 
                 diff(res1Path, res2Path, diffJsonPath, function(){

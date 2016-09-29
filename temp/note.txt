@@ -1,0 +1,2 @@
+this folder for intermediate data: rawNew.json, rawOld.json, resNew.json, resOld.json
+don't delete this folder!
