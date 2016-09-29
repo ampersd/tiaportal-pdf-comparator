@@ -2,11 +2,11 @@
 Tool for comparison of 2 pdf, that was produced from TIA Portal software
 
 # How to use
-Requirements: node v.4.6.0 
+Requirements: node v4.6.0 
 
 * First install all dependencies (type in command line, directory - current): ```npm install``` 
 
-* then put old and new pdf with the names "old.pdf" and "new.pdf" correspondently to project dir
+* then put old and new pdf with the names "old.pdf" and "new.pdf" correspondently to current dir (root dir of project)
 
 * start process (type in command line): ```node main.js```
 
