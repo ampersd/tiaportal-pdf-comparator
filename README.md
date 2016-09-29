@@ -31,6 +31,9 @@ result will have next structure:
 };
 ```
 
+### Step 1
+Can take  a long time: 2-5 minutes
+
 ### Step 2 limitations
 we parse table from pdf, first of all.
 So I clearly indicate the ranges of each column x coordinate.
