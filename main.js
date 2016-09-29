@@ -5,12 +5,10 @@ var diffJsonPath = __dirname + "/diff.json";
 
 // var pdf1Path = __dirname + "/old.pdf";
 // var pdf2Path = __dirname + "/new.pdf";
-
 // var raw1Path = __dirname + "/rawOld.json";
 // var raw2Path = __dirname + "/rawNew.json";
-
-var res1Path = __dirname + "/resOld.json";
-var res2Path = __dirname + "/resNew.json";
+// var res1Path = __dirname + "/resOld.json";
+// var res2Path = __dirname + "/resNew.json";
 
 // console.log("Stage1: Start processing old.pdf");
 // parse(pdf1Path, raw1Path, function() {
@@ -38,6 +36,10 @@ var res2Path = __dirname + "/resNew.json";
 // });
 
 
+
+// only finding diff stage
+var res1Path = __dirname + "/resOld.json";
+var res2Path = __dirname + "/resNew.json";
 var diffJsonPath = __dirname + "/diff.json";
 var diff = require('./lib/diffMaker.js');
 diff(res1Path, res2Path, diffJsonPath);
