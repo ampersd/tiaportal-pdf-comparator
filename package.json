@@ -1,0 +1,11 @@
+{
+  "name": "TIAPortalPdf-Comarison",
+  "description": "Tool for comparison of 2 pdf, that was produced from TIA Portal software",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "pdf2json": "~1.1.7",
+    "pretty-data": "~0.40.0",
+    "rus-diff": "~1.1.0"
+  }
+}
